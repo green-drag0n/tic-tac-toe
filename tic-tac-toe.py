@@ -1,5 +1,14 @@
+def intro():
+    player_info = ["player_one", "player_two", "X", "O"]
+    player_info[0] = input("player 1 please enter your name >>> ")
+    player_info[1] = input("player 2 please enter your name >>> ")
+    return player_info
+
+
+
+
 def new_board():
-    board = [7,8,9,4,5,6,1,2,3]
+    board = [7, 8, 9, 4, 5, 6, 1, 2, 3]
     return board
 
 
@@ -10,8 +19,8 @@ def display_board(board):
     return board
 
 
-def player_input(marker):
-    piece = input(f"player {marker} its your turn place your marker (X or O)")
+def player_input(name):
+    piece = input(f"{name}, its your turn place your marker (X or O)")
     return piece
 
 
@@ -25,5 +34,5 @@ def board_check():
 
 def replay():
     pass
-
+player_one, player_two = intro()
 display_board(new_board())
