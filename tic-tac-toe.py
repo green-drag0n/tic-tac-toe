@@ -19,9 +19,17 @@ def display_board(board):
     return board
 
 
-def player_input(name, marker):
-    location = int(input(f"{name}, its your turn place your marker {marker}, where would you like it?"))
-    return location
+def player_input(name, marker, moves):
+    while True:
+        try:
+            location = 69
+            while location not in moves:
+                location = int(input(f"{name}, its your turn place your marker {marker}, where would you like it?"))
+            break
+        except ValueError:
+            print("Invalid VA")
+    moves.remove(location)
+    return location, moves
 
 
 def placement(board, num, x):
@@ -67,23 +75,27 @@ def replay():
 def the_game():
     player_info = intro()
     board = new_board()
+    moves = new_board()
 
 
     turn = True
     no_winner = True
-
     while no_winner:
         if turn:
             display_board(board)
-            num = player_input(player_info[0], player_info[2])
+            num, moves = player_input(player_info[0], player_info[2], moves)
             board = placement(board, num, "X")
             turn = False
         else:
             display_board(board)
-            num = player_input(player_info[1], player_info[3])
+            num, moves = player_input(player_info[1], player_info[3], moves)
             board = placement(board, num, "O")
             turn = True
         no_winner = board_check(board, player_info)
+        if len(moves) == 0 and no_winner == True:
+            print("Tie game")
+            if replay():
+                the_game()
     if replay():
         the_game()
 
